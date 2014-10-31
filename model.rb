@@ -45,7 +45,7 @@ class Visit
 		def set_country			
 		    xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"  
 		    coun = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['country'].to_s
-		    if coun == nil || (coun == "{}") 
+		    if (coun == "") || (coun == "{}") 
 				coun = "Desconocida"
 			end
 		    self.country = coun
@@ -58,7 +58,7 @@ class Visit
 			reg = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['regionName'].to_s
 			puts "region ---> #{reg}"
 
-			if (reg == nil) || (reg == "{}") 
+			if (reg == "") || (reg == "{}") 
 				reg = "Desconocida"
 			end
 			puts "region ---> #{reg}"
