@@ -65,11 +65,27 @@ helpers do
 	end
 end
 
+def get_remote_ip(env)
+	
+	if addr = env['HTTP_X_FORWARDED_FOR']
+		addr.split(',').first.strip		
+	else
+		env['REMOTE_ADDR']
+	end
+end
+
+def set_ip			
+    xml = RestClient.get "http://ip-api.com/xml/#{get_remote_ip(env)}" 
+    ip = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['query']	
+end
+	
+	
+get '/' do
+
 	if current_user
 		@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
 	end
-	
-get '/' do
+
 	@u = User.first_or_create({ :uid => '0' }, {
 	:uid => '0',
 	:name => "anonymous",
@@ -243,7 +259,10 @@ post '/estadisticas' do
 
 			@url = Url.first(:short => short)
 
-			if @url == nil
+			puts "url ---> #{url}"
+
+			if @url != nil
+
 				id = @url.id
 				@visit = Visit.all(:url_id => id)
 				@num = @visit.count.to_i
@@ -282,7 +301,7 @@ post '/estadisticas' do
 
 end
 
-get '/:short' do
+get '/:shortened' do
 	puts "inside get '/:shortened': #{params}"
 
 	short_url = Url.first(:short => params[:shortened])
