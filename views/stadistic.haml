@@ -1,0 +1,29 @@
+.main.col-xs-12.col-sm-8.col-lg-8.col-sm-offset-2.col-lg-offset-2
+  %h3
+    %span.glyphicon.glyphicon-link
+  %h3 Introduzca una tiny URL
+  %form.form-inline{:action => "/estadisticas", :method => "post", :role => "form"}
+    #input.input-group.col-lg-offset-2.col-sm-offset-2.col-sm-8.col-xs-12.col-lg-8
+      %span.input-group-addon URL
+      %input#estadistica.form-control{:accesskey => "s", :autofocus => "", :name => "estadistica", :placeholder => "http://www.my-tiny-url-2.herokuapp.com/url", :type => "text"}/
+    %br/
+    %button.btn.btn-default.col-lg-offset-5.col-sm-offset-5.col-sm-2.col-xs-12.col-lg-2{:type => "submit", :value => "estadisticas"}
+      Ver
+  - if @mostrar == true
+    .estadisticas.col-xs-12.col-sm-12.col-lg-12
+      %p#orig
+        %strong Url original:
+        - if @url != nil
+          %a{:href => @url.url}
+            = @url.url
+      %p#numvis
+        %strong Numero de visitas:
+        = @num
+      .pais.col-xs-12.col-sm-12.col-lg-12
+        = geo_chart(@pais)
+      .pais.col-xs-12.col-sm-12.col-lg-12
+        = pie_chart(@pais)
+      .dia.col-xs-12.col-sm-12.col-lg-12
+        = pie_chart(@dia)
+      .dia.col-xs-12.col-sm-12.col-lg-12
+        = pie_chart(@region)

@@ -1,0 +1,79 @@
+
+#cabecera{
+	text-align: right;
+	padding-top:38px;
+	padding-bottom:10px;
+	padding-right: 15px;
+	padding-left: 50px;
+	height: 120px;
+	font-family: Verdana;
+	background-color: indianred;
+	color: white;	
+	background-image: url("/img/logo_vectorized.png");
+	background-repeat: no-repeat;
+	background-size: 41%;
+	background-position: left;
+}
+
+#cabecera a{
+	color: white;
+}
+.iconos{
+	margin-top: 2%;
+}
+.foto {
+	margin-right: 40px;
+	width: 45px;
+	height: 45px;
+	float: right;
+}
+.container{
+	background-color: white;
+	height: 100%;
+	width: 100%;	
+}
+#cuerpo{
+	background-color: #f7f7f9;	
+	margin-top: 5%;
+	margin-bottom: 3%;
+	text-align: center;
+}
+#urls{
+	padding-top: 2%;
+}
+.text-muted{
+	padding-top: 13px;
+	text-align: center;
+	background-color: #FFEFD5;
+}
+.footer {
+	bottom: 0;
+	height: 60px;
+	position: relative;
+	width: 100%;
+	margin-top: 10%;
+	background-color: #FFEFD5;
+}
+.footer p{
+	text-align: center;
+	margin: 10px 0 10px;
+	background-color: #FFEFD5;
+}
+
+.footer .container{
+
+	background-color: #FFEFD5;
+}
+
+.footer a{
+
+	color: brown;
+}
+.short{
+	margin-bottom: 3%;
+}
+
+body {
+    margin: -15px;
+}
+

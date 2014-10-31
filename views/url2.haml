@@ -1,0 +1,42 @@
+.main.col-xs-12.col-sm-8.col-lg-8.col-sm-offset-2.col-lg-offset-2
+  %h3
+    %span.glyphicon.glyphicon-send
+  %h3 Introduzca una URL
+  %form.form-inline{:action => "/", :method => "post", :role => "form"}
+    #input.input-group.col-lg-offset-2.col-sm-offset-2.col-sm-8.col-xs-12.col-lg-8
+      %span.input-group-addon URL
+      %input#myurl.form-control{:accesskey => "s", :autofocus => "", :name => "url", :placeholder => "http://www.ejemplo.com", :type => "text"}/
+    %br/
+    .input-group.col-lg-offset-4.col-sm-offset-4.col-sm-4.col-xs-12.col-lg-4
+      %input#pers.form-control{:accesskey => "s", :autofocus => "", :name => "personal", :placeholder => "URL Personalizada", :type => "text"}/
+    %br/
+    %button.btn.btn-default.col-lg-offset-5.col-sm-offset-5.col-sm-2.col-xs-12.col-lg-2{:type => "submit", :value => "Shorten"} Enviar
+  %br/
+  - if @short_url != nil
+    #urls.col-sm-12.col-xs-12.col-lg-12
+      %p.short
+        %strong URL corta:
+        %a{:href => "/#{@short_url.short}"}
+          my-tiny-url-2.herokuapp.com/#{@short_url.short}
+  %br/
+  %br/
+  %br/
+  - if current_user
+    #input.col-xs-12.col-sm-12.col-lg-12
+      #accordion.panel-group
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+                URLs del Usuario
+          #collapseOne.panel-collapse.collapse
+            .panel-body
+              %ol
+                - if @list != nil
+                  - @list.each do |url|
+                    %li
+                      %a{:href => "/#{url.short}"}
+                        my-tiny-url-2.herokuapp.com/#{url.short}
+                      → #{url.url}
+                      %br/
+                      %br/
