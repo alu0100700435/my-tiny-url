@@ -212,15 +212,87 @@ end
 
 
 get '/estadisticas' do
-
+	@num = 0;
+	@pais = Hash.new
+	@dia = Hash.new
+	@region = Hash.new 
+	@mostrar = false
+	haml :stadistic, :layout => :url
 end
 
 
 post '/estadisticas' do
 
+	@pais = Hash.new
+	@dia = Hash.new 
+	@region = Hash.new 
+
+	puts "inside post '/estadisticas': #{params}"
+	uri = URI::parse(params[:estadistica])
+	url = params[:estadistica]
+
+	if url.include? "my-tiny-url-2.herokuapp.com"
+
+		if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
+
+			@mostrar = true
+			short = params[:estadistica]
+			short.slice!("http://my-tiny-url-2.herokuapp.com/")
+			puts "short ===> #{short}"
+
+
+			@url = Url.first(:short => short)
+
+			if @url == nil
+				id = @url.id
+				@visit = Visit.all(:url_id => id)
+				@num = @visit.count.to_i
+
+				pais = @visit.contador_pais(id)	
+				pais.each do |i|
+					@pais[i.country] = i.count
+				end
+
+				dia = @visit.contador_fecha(id)
+				dia.each do |i|
+					@dia[i.date] = i.count
+				end
+
+				region = @visit.contador_region(id)
+				region.each do |i|
+					@region[i.region] = i.count
+				end
+			else
+
+				@error_no_existe = true;
+
+			end		
+
+		else
+			logger.info "Error! <#{params[:estadistica]}> is not a valid URL"
+				@error2=true;
+		end
+
+	else
+		@error_no = true
+	end
+	
+	
+	haml :stadistic, :layout => :url
+
 end
 
 get '/:short' do
+	puts "inside get '/:shortened': #{params}"
+
+	short_url = Url.first(:short => params[:shortened])
+
+
+	short_url.visit << Visit.create(:ip => set_ip, :url_id => short_url.id)
+	short_url.save
+
+	redirect short_url.url, 301
+
 	puts "inside get '/:shortened': #{params}"
 
 	short_url = Url.first(:short => params[:shortened])
