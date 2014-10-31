@@ -112,6 +112,85 @@ end
 
 post '/' do
 
+	
+		puts "inside post '/': #{params}"
+		uri = URI::parse(params[:url])
+		pers = params[:personal]
+
+		if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
+			if current_user
+				begin
+					
+					if pers == ""
+
+						short = Url.count + 1;
+
+						@short_url = Url.first(:user_id => current_user.id, :url => params[:url])
+						
+						if @short_url == nil
+							@short_url = Url.first_or_create(:user_id => current_user.id, :url => params[:url], :short => short)
+						end
+						
+						
+					end
+					if pers != ""						
+
+						consult = Url.first(:short => params[:personal])
+
+						if consult == nil
+							
+							@short_url = Url.first_or_create(:user_id => current_user.id, :url => params[:url], :short =>params[:personal])	
+							
+						else
+							@error = true
+						end
+					end
+
+					@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
+				rescue Exception => e
+					puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
+					pp @short_url
+					puts e.message
+				end
+				@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
+
+			else
+				begin
+					if pers == ""
+						short = Url.count + 1;
+						@short_url = Url.first(:user_id => '1', :url => params[:url])
+
+						if @short_url == nil
+							@short_url = Url.first_or_create(:user_id => '1', :url => params[:url], :short => short)
+						end
+				
+					end
+					if pers != ""
+						consult = Url.first(:short => params[:personal])
+						if consult == nil
+							@short_url = Url.first_or_create(:user_id => '1' , :url => params[:url], :short =>params[:personal])	
+						else
+							@error = true
+						end
+					end
+
+
+				rescue Exception => e
+					puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
+					pp @short_url
+					puts e.message
+					@error1 = true
+				end
+
+
+			end
+		else
+			logger.info "Error! <#{params[:url]}> is not a valid URL"
+			@error2=true;
+		end
+
+		haml :url2, :layout => :url
+
 
 end
 
@@ -126,5 +205,14 @@ post '/estadisticas' do
 end
 
 get '/:short' do
+	puts "inside get '/:shortened': #{params}"
+
+	short_url = Url.first(:short => params[:shortened])
+
+
+	short_url.visit << Visit.create(:ip => set_ip, :url_id => short_url.id)
+	short_url.save
+
+	redirect short_url.url, 301
 
 end
