@@ -174,7 +174,7 @@ post '/' do
 							@short_url = Url.first_or_create(:user_id => current_user.id, :url => params[:url], :short =>params[:personal])	
 							
 						else
-							@error = true
+							@error = true #La URL personalizada ya existe
 						end
 					end
 
@@ -183,6 +183,7 @@ post '/' do
 					puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
 					pp @short_url
 					puts e.message
+					@error1 = true
 				end
 				@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
 
@@ -218,7 +219,7 @@ post '/' do
 			end
 		else
 			logger.info "Error! <#{params[:url]}> is not a valid URL"
-			@error2=true;
+			@error2=true; #No es una URL válida
 		end
 
 		haml :url2, :layout => :url

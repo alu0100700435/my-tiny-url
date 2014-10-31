@@ -16,8 +16,13 @@
     #urls.col-sm-12.col-xs-12.col-lg-12
       %p.short
         %strong URL corta:
-        %a{:href => "/#{@short_url.short}"}
-          my-tiny-url-2.herokuapp.com/#{@short_url.short}
+        - if @error == true
+            %p ERROR: La URL personalizada ya existe.
+        - if else @error2 == true
+            %p ERROR: La URL no es válida.
+        - else
+            %a{:href => "/#{@short_url.short}"}
+              http://my-tiny-url-2.herokuapp.com/#{@short_url.short}
   %br/
   %br/
   %br/
