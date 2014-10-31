@@ -39,7 +39,7 @@ describe "My tiny url" do
 	end
 
 	it "Deberia devolver un error ya que ese campo no acepta URLs" do
-		refute_equal @pag, @consult.url2
+		refute_equal @pag, @consult.short
 	end
 	
 end
