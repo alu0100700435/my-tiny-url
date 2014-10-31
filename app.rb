@@ -134,40 +134,46 @@ post '/estadisticas' do
 
 	puts "inside post '/estadisticas': #{params}"
 	uri = URI::parse(params[:estadistica])
+	url = params[:estadistica]
 
-	
-	if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
+	if url.include? "my-tiny-url-2.herokuapp.com"
 
-		@mostrar = true
-		short = params[:estadistica]
-		short.slice!("http://my-tiny-url-2.herokuapp.com/")
-		puts "short ===> #{short}"
+		if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
 
-		@url = Url.first(:short => short)
-		id = @url.id
-		@visit = Visit.all(:url_id => id)
-		@num = @visit.count.to_i
+			@mostrar = true
+			short = params[:estadistica]
+			short.slice!("http://my-tiny-url-2.herokuapp.com/")
+			puts "short ===> #{short}"
 
-		pais = @visit.contador_pais(id)	
-		pais.each do |i|
-			@pais[i.country] = i.count
+			@url = Url.first(:short => short)
+			id = @url.id
+			@visit = Visit.all(:url_id => id)
+			@num = @visit.count.to_i
+
+			pais = @visit.contador_pais(id)	
+			pais.each do |i|
+				@pais[i.country] = i.count
+			end
+
+			dia = @visit.contador_fecha(id)
+			dia.each do |i|
+				@dia[i.date] = i.count
+			end
+
+			region = @visit.contador_region(id)
+			region.each do |i|
+				@region[i.region] = i.count
+			end
+
+			
+
+		else
+			logger.info "Error! <#{params[:estadistica]}> is not a valid URL"
+				@error2=true;
 		end
-
-		dia = @visit.contador_fecha(id)
-		dia.each do |i|
-			@dia[i.date] = i.count
-		end
-
-		region = @visit.contador_region(id)
-		region.each do |i|
-			@region[i.region] = i.count
-		end
-
-		
 
 	else
-		logger.info "Error! <#{params[:estadistica]}> is not a valid URL"
-			@error2=true;
+		@error_no = true
 	end
 	
 	
