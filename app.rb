@@ -65,6 +65,22 @@ helpers do
 	end
 end
 
+	if current_user
+		@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
+	end
+	
+get '/' do
+	@u = User.first_or_create({ :uid => '0' }, {
+	:uid => '0',
+	:name => "anonymous",
+	:email => "anonymous@anonymous.com",
+	:created_at => Time.now	})
+	
+	session[:anonymous] = @u.id
+
+	haml :url2, :layout => :url
+end
+
 get '/auth/:name/callback' do
 	session.clear
 	@auth = request.env["omniauth.auth"]
