@@ -38,6 +38,10 @@ class Visit
 
 		belongs_to :url
 
+		before :create, :set_country
+		before :create, :set_region
+
+
 		def set_country			
 		    xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"  
 		    coun = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['country'].to_s
