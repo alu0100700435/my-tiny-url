@@ -9,6 +9,9 @@
     %br/
     %button.btn.btn-default.col-lg-offset-5.col-sm-offset-5.col-sm-2.col-xs-12.col-lg-2{:type => "submit", :value => "estadisticas"}
       Ver
+
+  - if @error2 == true
+    %p.error.col-xs-12.col-sm-12.col-lg-12  La url introducida no es válida
   - if @mostrar == true
     .estadisticas.col-xs-12.col-sm-12.col-lg-12
       %p#orig

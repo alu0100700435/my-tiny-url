@@ -218,7 +218,7 @@ post '/' do
 			end
 		else
 			logger.info "Error! <#{params[:url]}> is not a valid URL"
-			@error2=true;
+			@error2 = true;
 		end
 
 		haml :url2, :layout => :url
@@ -233,6 +233,7 @@ get '/estadisticas' do
 	@dia = Hash.new
 	@region = Hash.new 
 	@mostrar = false
+	@error2 = false
 	haml :stadistic, :layout => :url
 end
 
@@ -283,17 +284,17 @@ post '/estadisticas' do
 				end
 			else
 
-				@error_no_existe = true;
+				@error2 = true; # no existe la url corta
 
 			end		
 
 		else
 			logger.info "Error! <#{params[:estadistica]}> is not a valid URL"
-				@error2=true;
+				@error2 = true; # usl no valida
 		end
 
 	else
-		@error_no = true
+		@error2 = true #no es una tiny url
 	end
 	
 	

@@ -29,6 +29,12 @@
 width: 100%;
 }
 
+p .error{
+
+	font-style: italic;
+	font-weight: bold;
+
+}
 
 .header{
 	text-align: right;
