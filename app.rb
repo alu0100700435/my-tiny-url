@@ -145,27 +145,33 @@ post '/estadisticas' do
 			short.slice!("http://my-tiny-url-2.herokuapp.com/")
 			puts "short ===> #{short}"
 
+
 			@url = Url.first(:short => short)
-			id = @url.id
-			@visit = Visit.all(:url_id => id)
-			@num = @visit.count.to_i
 
-			pais = @visit.contador_pais(id)	
-			pais.each do |i|
-				@pais[i.country] = i.count
-			end
+			if @url == nil
+				id = @url.id
+				@visit = Visit.all(:url_id => id)
+				@num = @visit.count.to_i
 
-			dia = @visit.contador_fecha(id)
-			dia.each do |i|
-				@dia[i.date] = i.count
-			end
+				pais = @visit.contador_pais(id)	
+				pais.each do |i|
+					@pais[i.country] = i.count
+				end
 
-			region = @visit.contador_region(id)
-			region.each do |i|
-				@region[i.region] = i.count
-			end
+				dia = @visit.contador_fecha(id)
+				dia.each do |i|
+					@dia[i.date] = i.count
+				end
 
-			
+				region = @visit.contador_region(id)
+				region.each do |i|
+					@region[i.region] = i.count
+				end
+			else
+
+				@error_no_existe = true;
+
+			end		
 
 		else
 			logger.info "Error! <#{params[:estadistica]}> is not a valid URL"
@@ -182,5 +188,15 @@ post '/estadisticas' do
 end
 
 get '/:short' do
+
+	puts "inside get '/:shortened': #{params}"
+
+	short_url = Url.first(:short => params[:shortened])
+
+
+	short_url.visit << Visit.create(:ip => set_ip, :url_id => short_url.id)
+	short_url.save
+
+	redirect short_url.url, 301
 
 end
