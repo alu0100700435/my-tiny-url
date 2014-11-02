@@ -24,9 +24,9 @@
           %a.navbar-brand{:href => "#"} My Tiny Url
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li.active
+            %li{:class => @activar}
               %a{:href => "/"} Acortador
-            %li
+            %li{:class => @activar2}
               %a{:href => "/estadisticas"} Estadisticas
     .container
       .row

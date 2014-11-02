@@ -85,7 +85,8 @@ get '/' do
 	if current_user
 		@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
 	end
-
+	@activar="active"
+	@activar2=""
 	@u = User.first_or_create({ :uid => '0' }, {
 	:uid => '0',
 	:name => "anonymous",
@@ -143,7 +144,8 @@ end
 
 
 post '/' do
-
+		@activar="active"
+		@activar2=""
 	
 		puts "inside post '/': #{params}"
 		uri = URI::parse(params[:url])
@@ -235,6 +237,10 @@ end
 
 
 get '/estadisticas' do
+
+	@activar2="active"
+	@activar=""
+
 	@num = 0;
 	@pais = Hash.new
 	@dia = Hash.new
@@ -246,6 +252,8 @@ end
 
 
 post '/estadisticas' do
+	@activar2="active"
+	@activar=""
 
 	@pais = Hash.new
 	@dia = Hash.new 
@@ -311,6 +319,8 @@ post '/estadisticas' do
 end
 
 get '/:shortened' do
+
+	
 	puts "inside get '/:shortened': #{params}"
 
 	short_url = Url.first(:short => params[:shortened])
