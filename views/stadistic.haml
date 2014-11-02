@@ -22,11 +22,12 @@
       %p#numvis
         %strong Numero de visitas:
         = @num
-      .pais.col-xs-12.col-sm-12.col-lg-12
-        = geo_chart(@pais)
-      .pais.col-xs-12.col-sm-12.col-lg-12
-        = pie_chart(@pais)
-      .dia.col-xs-12.col-sm-12.col-lg-12
-        = pie_chart(@dia)
-      .dia.col-xs-12.col-sm-12.col-lg-12
-        = pie_chart(@region)
+      -if @num > 0
+        .pais.col-xs-12.col-sm-12.col-lg-12
+          = geo_chart(@pais)
+        .pais.col-xs-12.col-sm-12.col-lg-12
+          = pie_chart(@pais)
+        .dia.col-xs-12.col-sm-12.col-lg-12
+          = pie_chart(@dia)
+        .dia.col-xs-12.col-sm-12.col-lg-12
+          = pie_chart(@region)

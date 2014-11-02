@@ -149,6 +149,8 @@ post '/' do
 		uri = URI::parse(params[:url])
 		pers = params[:personal]
 
+
+
 		if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
 			if current_user
 				begin
@@ -165,7 +167,7 @@ post '/' do
 						
 						
 					end
-					if pers != ""						
+					if (pers != "") && (pers != "estadisticas")						
 
 						consult = Url.first(:short => params[:personal])
 
@@ -199,7 +201,7 @@ post '/' do
 						end
 				
 					end
-					if pers != ""
+					if (pers != "") && (pers != "estadisticas")	
 						consult = Url.first(:short => params[:personal])
 						if consult == nil
 							@short_url = Url.first_or_create(:user_id => '1' , :url => params[:url], :short =>params[:personal])	
@@ -257,7 +259,7 @@ post '/estadisticas' do
 
 		if uri.is_a? URI::HTTP or uri.is_a? URI::HTTPS then
 
-			@mostrar = true
+			
 			short = params[:estadistica]
 			short.slice!("http://my-tiny-url-2.herokuapp.com/")
 			puts "short ===> #{short}"
@@ -268,7 +270,8 @@ post '/estadisticas' do
 			puts "url ---> #{url}"
 
 			if @url != nil
-
+				@mostrar = true
+				
 				id = @url.id
 				@visit = Visit.all(:url_id => id)
 				@num = @visit.count.to_i
