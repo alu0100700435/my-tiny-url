@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Tutorial:: My Tiny Url 2
+		</title>
+
+		<link rel="icon" type="image/png" href="public/img/icon.png"/>
+
+   		<link href="public/css/bootstrap.min.css" rel="stylesheet">
+		<link href="public/css/bootstrap.css" rel="stylesheet">
+		<link href="public/css/style2.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<img class="img-responsive img-tt" src="public/img/icon.png" alt="logo"> 
+				</div>
+				
+			</div>
+    	</div>
+
+    	<div class="jumbotron">
+      		<div class=" my container">
+				<h1 class="sub">
+					Acortador de Urls y Estadisticas
+				</h1>
+				<p class="sub" >
+					Sistemas y Tecnologías web
+				</p>
+			</div>
+    	</div>
+
+		
+		<div class="container main">
+    		<div class="row">
+		
+				<h2 id="objetivo">
+					Objetivo
+				</h2>
+				<p>
+					Hacer que la aplicacion [My Tiny Url], creada con anterioridad, ofrezca estadisticas de las urls acortadas. Mostrando el numero de visitas totales, por día, y por paises. También se incluyen las estadisticas por región, y ofrece un mapa de localización de las visitas. 
+
+				</p>
+				<p>
+					Para poder implementar los graficos estadisticos se usará [chartkick], la cual esta implementada en JavaScript.
+				</p>
+				
+				<h2 id="funcionamiento">
+					Funcionamiento
+				</h2>
+				
+				<p>
+					Hay dos formas posibles de ver el funcionamiento de la aplicación, una mediante la web, gracias a Heroku, y otra desde local.
+				</p>
+				<ol>
+					<li class="apt">
+						<p class="subtit">
+							Visualización en Heroku
+						</p>
+						<p> 
+							Para poder ver la aplicación en dicha plataforma, haz click <a href="http://my-tiny-url-2.herokuapp.com">aquí</a>. Una vez ahí acorta tu url, o si quieres guardarlas ¡registrate!, lo podrás hacer mediante Google, Github, Facebook o Twitter.
+						</p>
+					</li>
+
+					<li class="apt">
+						<p class="subtit">Visualización en local</p>
+						<p> 
+							Primero se ha de clonar el repositorio de github <a href="https://github.com/alu0100700435/my-tiny-url.git">my-tiny-url</a>, de la siguiente forma: 
+						</p>
+						<pre><code class="lang-sh"> user@ubuntu-hp:~$ git clone git@github.com:alu0100700435/my-tiny-url.git
+						</code></pre>
+						
+						<p> 
+							Una vez clonado el repositorio, y situado en el directorio, modifique el archivo config.yml con sus claves(recomendado). Y a continuación ejecuta bundler:
+						</p>
+						<pre><code class="lang-sh"> user@ubuntu-hp:~/my-tiny-url$ bundle install
+						</code></pre>
+						
+						<p> 
+							Una vez hecho todo lo anterior, procede a ejecutar <em>rake server</em>, y por defecto se empezará a ejecutar.
+						</p>
+						<p> 
+							Una vez en ejecución, abre el navegador y escribe en la barra de direcciones <em>localhost:9292</em> y accederás a la web de la aplicación:
+						</p>
+						<p> 
+							<img class="img-responsive myimg img-rounded"  src="https://github.com/alu0100700435/my-tiny-url/blob/gh-pages/public/img/ejemplo.png" alt="ejemplo navegador">
+						</p>
+						<p> 
+							Y una vez acortadas, mira las estadisticas!
+						</p>
+					</li>
+				</ol>
+
+
+			</div> <!-- fin row-->
+		</div><!--fin container-->
+
+		<div id="footer">
+			<div class="container">
+				<p class="text-muted">
+					<a href="https://alu0100700435.github.io/" target="_blank">alu0100700435</a> & <a href="https://alu0100706468.github.io/" target="_blank">alu0100706468</a>| Copyright 2011-2014. All rights reserved.
+				</p>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    	<script src="public/bootstrap.min.js"></script>
+
+	</body>
+</html>

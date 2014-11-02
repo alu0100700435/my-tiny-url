@@ -1,0 +1,101 @@
+.mybtn{
+	margin-top: 2%;
+	
+}
+
+ input{
+    color: grey;
+    font: inherit;
+    margin: 0;
+}
+
+.lista{
+    text-align: center;
+}
+
+.jumbotron{
+	background-image: url("https://github.com/alu0100700435/my-tiny-url/blob/gh-pages/public/img/fondo.png");
+	padding-top: 75px;
+	background-repeat: repeat;
+	background-position: right;
+	background-color: orange;
+}
+
+
+.myimg{
+
+	width: 650px;
+	margin-bottom: 1%;
+	margin-top: 1%;
+}
+
+#footer{
+	margin-top: 2%;
+	background-color: #F8F8F8;
+}
+
+.text-muted{
+	padding-top: 13px;
+	text-align: center;
+}
+
+a{
+	color: orange;
+}
+
+body{
+	font-family: sans-serif;
+}
+
+pre{
+
+	width: 100%;
+}
+
+.main{
+
+padding-left: 10%;
+padding-right: 10%;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.sub{
+	text-shadow: 0px -1px 14px rgba(108, 38, 0, 1);
+	color: #ffffff;
+}
+
+.jumbotron h1, .jumbotron .h1 {
+    color: snow;
+
+}
+
+.apt{
+	margin-top:3%;
+}
+
+h4{
+	color: orange;
+}
+
+ol {
+color: orange;
+font-size: 17px;
+}
+
+ol p{
+	color: #333;
+	font-size: 14px;
+}
+.img-tt{
+	width: 45px;
+	height: auto;
+	float: left;
+	margin-right: 5%;
+}
+.navbar-header{
+	float: right;
+	margin-right: 50%;
+}
