@@ -26,10 +26,6 @@ use Rack::Session::Pool, :expire_after => 2592000
 set :session_secret, '*&(^#234a)'
 
 
-use Rack::Session::Pool, :expire_after => 2592000
-set :session_secret, '*&(^#234a)'
-
-
 configure :development, :test do
 	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/my_shortened_urls.db")
 end
