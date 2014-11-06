@@ -108,7 +108,7 @@ get '/auth/:name/callback' do
 	:created_at => Time.now	})
 	
 	session[:user_id] = @user.id
-	redirect '/'
+	redirect back
 end
 
 get '/auth/failure' do
