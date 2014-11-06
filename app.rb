@@ -138,7 +138,7 @@ end
 
 get "/sign_out" do
 	session.clear
-	redirect '/'
+	redirect back
 end
 
 
