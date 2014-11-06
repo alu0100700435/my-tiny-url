@@ -11,11 +11,17 @@
       Ver
 
   - if @error1
-    %p.error.col-xs-12.col-sm-12.col-lg-12 No existe la URL corta
+    %p
+      %i
+        %strong.aviso.col-xs-12.col-sm-12.col-lg-12 No existe la URL corta
   - if @error2
-    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es http o https
+    %p
+      %i
+        %strong.aviso.col-xs-12.col-sm-12.col-lg-12 La URL no es http o https
   - if @error3
-    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es una mytinyURL
+    %p
+      %i
+        %strong.aviso.col-xs-12.col-sm-12.col-lg-12 La URL no es una mytinyURL
   
   - if @mostrar == true
     .estadisticas.col-xs-12.col-sm-12.col-lg-12

@@ -14,11 +14,17 @@
   %br/
 
   - if @error1
-    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL pesonalizada ya existe
+    %p
+      %i
+        %strong.aviso.col-xs-12.col-sm-12.col-lg-12 La URL personalizada ya existe
   - if @error2
-    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es válida
+    %p
+      %i
+        %strong.aviso.col-xs-12.col-sm-12.col-lg-12 La URL no es válida
   - if @error3
-    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es http o https
+    %p
+      %i
+        %strong.aviso.col-xs-12.col-sm-12.col-lg-12 La URL no es http o https
         
   - if @short_url != nil
     #urls.col-sm-12.col-xs-12.col-lg-12
