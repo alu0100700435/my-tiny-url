@@ -56,12 +56,12 @@ class Visit
 		def set_region
 			xml = RestClient.get "http://ip-api.com/xml/#{self.ip}"
 			reg = XmlSimple.xml_in(xml.to_s, { 'ForceArray' => false })['regionName'].to_s
-			puts "region ---> #{reg}"
+			
 
 			if (reg == "") || (reg == "{}") 
 				reg = "Desconocida"
 			end
-			puts "region ---> #{reg}"
+			
 			self.region = reg
 			self.save
 		end
