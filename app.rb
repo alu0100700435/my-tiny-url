@@ -83,6 +83,9 @@ get '/' do
 	end
 	@activar="active"
 	@activar2=""
+	@error1 = false
+	@error2 = false
+	@error3 = false
 	@u = User.first_or_create({ :uid => '0' }, {
 	:uid => '0',
 	:name => "anonymous",
@@ -175,7 +178,7 @@ post '/' do
 							
 						else
 							puts "url corta existe"
-							@error = true #La URL personalizada ya existe
+							@error1 = true #La URL personalizada ya existe
 						end
 					end
 
@@ -184,7 +187,7 @@ post '/' do
 					puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
 					pp @short_url
 					puts e.message
-					@error = true
+					@error2 = true
 				end
 				@list = Url.all(:user_id => current_user.id, :order => [:id.desc], :limit => 20)
 
@@ -205,7 +208,7 @@ post '/' do
 							@short_url = Url.first_or_create(:user_id => '1' , :url => params[:url], :short =>params[:personal])	
 						else
 							puts "url corta existe"
-							@error = true
+							@error1 = true
 						end
 					end
 
@@ -214,7 +217,7 @@ post '/' do
 					puts "EXCEPTION!!!!!!!!!!!!!!!!!!!"
 					pp @short_url
 					puts e.message
-					@error= true
+					@error2= true
 				end
 
 
@@ -222,7 +225,7 @@ post '/' do
 		else
 			logger.info "Error! <#{params[:url]}> is not a valid URL"
 
-			@error = true;
+			@error3 = true;
 
 		end
 
@@ -242,7 +245,9 @@ get '/estadisticas' do
 	@dia = Hash.new
 	@region = Hash.new 
 	@mostrar = false
+	@error1 = false
 	@error2 = false
+	@error3 = false
 	haml :stadistic, :layout => :url
 end
 
@@ -296,17 +301,17 @@ post '/estadisticas' do
 				end
 			else
 
-				@error2 = true; # no existe la url corta
+				@error1 = true; # no existe la url corta
 
 			end		
 
 		else
 			logger.info "Error! <#{params[:estadistica]}> is not a valid URL"
-				@error2 = true; # usl no valida
+				@error2 = true; # url no valida
 		end
 
 	else
-		@error2 = true #no es una tiny url
+		@error3 = true #no es una tiny url
 	end
 	
 	

@@ -10,8 +10,13 @@
     %button.btn.btn-default.col-lg-offset-5.col-sm-offset-5.col-sm-2.col-xs-12.col-lg-2{:type => "submit", :value => "estadisticas"}
       Ver
 
-  - if @error2 == true
-    %p.error.col-xs-12.col-sm-12.col-lg-12  La url introducida no es válida
+  - if @error1
+    %p.error.col-xs-12.col-sm-12.col-lg-12 No existe la URL corta
+  - if @error2
+    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es http o https
+  - if @error3
+    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es una mytinyURL
+  
   - if @mostrar == true
     .estadisticas.col-xs-12.col-sm-12.col-lg-12
       %p#orig

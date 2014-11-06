@@ -13,8 +13,12 @@
     %button.btn.btn-default.col-lg-offset-5.col-sm-offset-5.col-sm-2.col-xs-12.col-lg-2{:type => "submit", :value => "Shorten"} Enviar
   %br/
 
-  - if @error
-    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL o la URL pesonalizada no es válida
+  - if @error1
+    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL pesonalizada ya existe
+  - if @error2
+    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es válida
+  - if @error3
+    %p.error.col-xs-12.col-sm-12.col-lg-12 La URL no es http o https
         
   - if @short_url != nil
     #urls.col-sm-12.col-xs-12.col-lg-12
