@@ -262,7 +262,11 @@ post '/estadisticas' do
 
 	puts "inside post '/estadisticas': #{params}"
 	uri = URI::parse(params[:estadistica])
+	puts "#{params[:estadistica]}"
 	url = params[:estadistica]
+    
+
+    puts "#{url}"
 
 	if url.include? "my-tiny-url-2.herokuapp.com"
 
@@ -271,9 +275,13 @@ post '/estadisticas' do
 			
 			short = params[:estadistica]
 			short.slice!("http://my-tiny-url-2.herokuapp.com/")
-			puts "short ===> #{short}"
+			puts "short ===> #{short} - hola"
 
+			short = short.lstrip
+			short = short.rstrip
 
+			puts "short ===> #{short} - hola"
+			
 			@url = Url.first(:short => short)
 
 			puts "url ---> #{url}"
